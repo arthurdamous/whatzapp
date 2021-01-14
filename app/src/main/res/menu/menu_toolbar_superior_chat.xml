@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="Ligação em vídeo"
+        android:icon="@drawable/ic_outline_videocam_24"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Ligação em áudio"
+        android:icon="@drawable/ic_outline_call_24"
+        app:showAsAction="always"/>
+
+    <item
+        android:title="Ligação em áudio"
+        android:icon="@drawable/ic_outline_call_24"
+        app:showAsAction="never"/>
+
+
+</menu>
