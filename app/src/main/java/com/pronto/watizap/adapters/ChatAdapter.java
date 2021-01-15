@@ -17,6 +17,9 @@ import com.pronto.watizap.holders.ChatRecebidoHolder;
 
 public class ChatAdapter extends ListAdapter<Mensagem, RecyclerView.ViewHolder> {
 
+    private final int ENVIADA = 0;
+    private final int RECEBIDA = 1;
+
     public ChatAdapter() {
         super(DIFF_CALLBACK);
     }
@@ -24,13 +27,25 @@ public class ChatAdapter extends ListAdapter<Mensagem, RecyclerView.ViewHolder> 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ChatEnviadoHolder(ItemChatMensagemUsuarioBinding.inflate(LayoutInflater.from(parent.getContext()),parent, false).getRoot());
+        if (viewType == ENVIADA)
+            return new ChatEnviadoHolder(ItemChatMensagemUsuarioBinding.inflate(LayoutInflater.from(parent.getContext()),
+                    parent, false).getRoot());
+        else
+            return new ChatRecebidoHolder(ItemChatMensagemBinding.inflate(LayoutInflater.from(parent.getContext()),
+                    parent, false).getRoot());
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ChatEnviadoHolder) holder).bind(getItem(position));
-        ((ChatRecebidoHolder) holder).bind(getItem(position));
+        if (getItemViewType(position) == ENVIADA)
+            ((ChatEnviadoHolder) holder).bind(getItem(position));
+        else
+            ((ChatRecebidoHolder) holder).bind(getItem(position));
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return getItem(position).isMine() ? ENVIADA : RECEBIDA;
     }
 
     public static DiffUtil.ItemCallback<Mensagem> DIFF_CALLBACK = new DiffUtil.ItemCallback<Mensagem>() {

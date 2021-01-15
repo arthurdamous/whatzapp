@@ -8,38 +8,32 @@ public class Mensagem implements Serializable {
     private int id;
     private String textoMensagem;
     private String dataMensagem;
+    private boolean isMine;
 
     public Mensagem() {
     }
 
-    public Mensagem(int id, String textoMensagem, String dataMensagem) {
+    public Mensagem(int id, String textoMensagem, String dataMensagem, boolean isMine) {
         this.id = id;
         this.textoMensagem = textoMensagem;
         this.dataMensagem = dataMensagem;
+        this.isMine = isMine;
     }
 
     public int getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getTextoMensagem() {
         return textoMensagem;
-    }
-
-    public void setTextoMensagem(String textoMensagem) {
-        this.textoMensagem = textoMensagem;
     }
 
     public String getDataMensagem() {
         return dataMensagem;
     }
 
-    public void setDataMensagem(String dataMensagem) {
-        this.dataMensagem = dataMensagem;
+    public boolean isMine() {
+        return isMine;
     }
 
     @Override
@@ -48,12 +42,13 @@ public class Mensagem implements Serializable {
         if (o == null || getClass() != o.getClass()) return false;
         Mensagem mensagem = (Mensagem) o;
         return id == mensagem.id &&
+                isMine == mensagem.isMine &&
                 Objects.equals(textoMensagem, mensagem.textoMensagem) &&
                 Objects.equals(dataMensagem, mensagem.dataMensagem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, textoMensagem, dataMensagem);
+        return Objects.hash(id, textoMensagem, dataMensagem, isMine);
     }
 }
